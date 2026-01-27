@@ -4,9 +4,9 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-namespace TestProject1
+namespace TestProjectAlinImobiliare.Tests
 {
-    public class Tests
+    public class ConnectionTest
     {
         IWebDriver driver;
         [SetUp]
@@ -17,7 +17,7 @@ namespace TestProject1
         }
 
         [Test]
-        public void Test1()
+        public void AccessingWebsite()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1/licenta");
 
