@@ -12,7 +12,7 @@ namespace TestProjectAlinImobiliare
         [FindsBy(How = How.Name, Using = "login_submit")]
         private IWebElement loginbtn;
         public LoginPage(IWebDriver driver) { this.driver = driver; PageFactory.InitElements(driver, this); }
-        public void login(string username, string password)
+        public void Login(string username, string password)
         {
             emailtxt.SendKeys(username);
             passwordtxt.SendKeys(password);

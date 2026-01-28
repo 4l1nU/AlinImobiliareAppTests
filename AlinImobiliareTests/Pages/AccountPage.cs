@@ -25,6 +25,9 @@ namespace TestProjectAlinImobiliare.Pages
         public IWebElement LoginPassword => driver.FindElement(By.Id("loginPassword"));
         public IWebElement LoginButton => driver.FindElement(By.Name("login_submit"));
 
+        // Logout button
+        public IWebElement LogoutButton => driver.FindElement(By.LinkText("Ieși din cont"));
+
         // Register fields
         public IWebElement FirstName => driver.FindElement(By.Name("first_name"));
         public IWebElement LastName => driver.FindElement(By.Name("last_name"));
@@ -34,5 +37,12 @@ namespace TestProjectAlinImobiliare.Pages
 
         // Messages (simple locator)
         public IWebElement Body => driver.FindElement(By.TagName("body"));
+
+        public void Login(string email, string password)
+        {
+            LoginEmail.SendKeys(email);
+            LoginPassword.SendKeys(password);
+            LoginButton.Click();
+        }
     }
 }
