@@ -17,7 +17,7 @@ namespace TestProjectAlinImobiliare.Tests
         }
 
         [Test]
-        public void Test1()
+        public void Login_WithValidCredentialsFromTestParameters_ShouldRedirect()
         {
             string? User = TestContext.Parameters["user"];
             string? Password = TestContext.Parameters["password"];

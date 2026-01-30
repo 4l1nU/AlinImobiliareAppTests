@@ -4,7 +4,6 @@
 		<Parameter name="user" value="scornea.a@gmail.com" />
 		<Parameter name="password" value="scornea" />
 		<Parameter name="login_url" value="http://127.0.0.1/licenta/authentication.php" />
-		<Parameter name="golf_url" value="https://admlucid.com/Golf" />
 		<Parameter name="home_url" value="http://127.0.0.1/licenta/" />
 	</TestRunParameters>
 </RunSettings>

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TestProjectAlinImobiliare.Pages;
 
 namespace TestProjectAlinImobiliare;
@@ -34,7 +35,8 @@ public class AccountTests : TestBase
     public void Register_WithValidData_ShouldShowSuccessMessage()
     {
         page.RegisterTab.Click();
-        Thread.Sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(p => page.FirstName.Displayed);
 
         page.FirstName.SendKeys("Test");
         page.LastName.SendKeys("User");
@@ -42,7 +44,7 @@ public class AccountTests : TestBase
         page.RegisterPassword.SendKeys("Password123!");
 
         page.RegisterButton.Click();
-        Thread.Sleep(2000);
+        wait.Until(p => page.Body.Text.Contains("Mail trimis") || page.Body.Text.Contains("succes"));
 
         Assert.That(page.Body.Text.Contains("Mail trimis") || page.Body.Text.Contains("succes"));
 
@@ -52,10 +54,11 @@ public class AccountTests : TestBase
     public void Register_WithEmptyFields_ShouldNotSubmit()
     {
         page.RegisterTab.Click();
-        Thread.Sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(p => page.FirstName.Displayed);
 
         page.RegisterButton.Click();
-        Thread.Sleep(1000);
+        wait.Until(p => page.FirstName.GetAttribute("validationMessage") != "");
 
         Assert.That(page.FirstName.GetAttribute("validationMessage") != "");
     }
@@ -67,7 +70,8 @@ public class AccountTests : TestBase
     {
         page.Login("scornea.a@gmail.com", "scornea");
 
-        Thread.Sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(d => d.Url == BaseUrl + "profile/");
 
         Assert.That(driver.Url.Contains("profile/"));
     }
@@ -77,7 +81,8 @@ public class AccountTests : TestBase
     {
         page.Login(TestContext.Parameters["user"], TestContext.Parameters["password"]);
 
-        Thread.Sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(d => d.Url == TestContext.Parameters["home_url"] + "profile/");
 
         Assert.That(driver.Url.Contains("profile/"));
     }
@@ -97,14 +102,15 @@ public class AccountTests : TestBase
     {
         page.Login("scornea.a@gmail.com", "scornea");
 
-        Thread.Sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(d => d.Url == BaseUrl + "profile/");
 
         page.LogoutButton.Click();
 
-        Thread.Sleep(2000);
+        wait.Until(d => d.Url == BaseUrl);
 
         Assert.That(driver.Url, Is.EqualTo("http://127.0.0.1/licenta/"));
-        Assert.That(!driver.FindElement(By.Id("navbarSupportedContent")).Text.Contains("BINE AI VENIT"));
+        Assert.That(driver.FindElement(By.Id("navbarSupportedContent")).Text, Does.Not.Contain("BINE AI VENIT"));
     }
 
     //TAB FUNCTIONALITY TEST
@@ -113,7 +119,8 @@ public class AccountTests : TestBase
     public void RegisterTab_Click_ShouldShowRegisterForm()
     {
         page.RegisterTab.Click();
-        Thread.Sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until(p => page.FirstName.Displayed);
 
         Assert.That(page.FirstName.Displayed);
     }
