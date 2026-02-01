@@ -19,7 +19,7 @@ namespace TestProjectAlinImobiliare.Tests
         [Test]
         public void AccessingWebsite()
         {
-            driver.Navigate().GoToUrl("http://127.0.0.1/licenta");
+            driver.Navigate().GoToUrl(TestContext.Parameters["home_url"]);
 
             Assert.That(driver.Url, Is.EqualTo("http://127.0.0.1/licenta/"));
             Assert.That(driver.Title, Is.EqualTo("Acasa"));
